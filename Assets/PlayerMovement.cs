@@ -13,15 +13,18 @@ public class PlayerMovement : MonoBehaviour
     public Transform groundCheck;
     public float groundCheckRadius = 0.1f;
     public LayerMask groundLayer;
+    public Animator animator;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     public void OnMove(InputValue value)
     {
         moveInput = value.Get<Vector2>();
+        animator.SetBool("IsWalking", true);
     }
 
     public void OnJump(InputValue value)
@@ -37,15 +40,11 @@ public class PlayerMovement : MonoBehaviour
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
         rb.linearVelocity = new Vector2(moveInput.x * moveSpeed, rb.linearVelocity.y);
-    }
 
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        isGrounded = true;
-    }
+        if (rb.linearVelocity.x == 0)
+        {
+            animator.SetBool("IsWalking", false);
+        }
 
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        isGrounded = false;
     }
 }
