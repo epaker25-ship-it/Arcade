@@ -32,6 +32,7 @@ public class PlayerMovement : MonoBehaviour
         if (value.isPressed && isGrounded)
         {
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+            animator.SetTrigger("Jump");
         }
     }
 
@@ -44,6 +45,22 @@ public class PlayerMovement : MonoBehaviour
         if (rb.linearVelocity.x == 0)
         {
             animator.SetBool("IsWalking", false);
+        }
+
+        if (rb.linearVelocity.y >= 0)
+        {
+            animator.SetBool("IsFalling", false);
+        }
+        else
+        {
+            if (isGrounded)
+            {
+                animator.SetBool("IsFalling", false);
+            }
+            else
+            {
+                animator.SetBool("IsFalling", true);
+            }
         }
 
     }
