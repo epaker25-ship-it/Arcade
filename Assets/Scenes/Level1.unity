@@ -133,7 +133,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -2253911629886400664, guid: 9ed9ad27dcec19b4aa55fefdf9e02e27, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3626916397498700004, guid: 9ed9ad27dcec19b4aa55fefdf9e02e27, type: 3}
       propertyPath: m_Size.x
@@ -419,7 +419,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -2253911629886400664, guid: 9ed9ad27dcec19b4aa55fefdf9e02e27, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3626916397498700004, guid: 9ed9ad27dcec19b4aa55fefdf9e02e27, type: 3}
       propertyPath: m_Size.x
@@ -890,7 +890,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -2253911629886400664, guid: 9ed9ad27dcec19b4aa55fefdf9e02e27, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3626916397498700004, guid: 9ed9ad27dcec19b4aa55fefdf9e02e27, type: 3}
       propertyPath: m_Size.x
@@ -1045,6 +1045,7 @@ GameObject:
   - component: {fileID: 1183929078}
   - component: {fileID: 1183929077}
   - component: {fileID: 1183929076}
+  - component: {fileID: 1183929081}
   - component: {fileID: 1183929073}
   - component: {fileID: 1183929075}
   - component: {fileID: 1183929074}
@@ -1180,6 +1181,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   animator: {fileID: 1183929079}
+  movementLocked: 0
 --- !u!212 &1183929077
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1286,6 +1288,23 @@ SortingGroup:
   m_SortingLayer: 0
   m_SortingOrder: 4
   m_SortAtRoot: 0
+--- !u!114 &1183929081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1183929072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f16c08c896af8694b8b7921349aec56b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxDashSpeed: 25
+  dashDuration: 7
+  stopLayers:
+    serializedVersion: 2
+    m_Bits: 128
 --- !u!1 &1258397049 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -2253911629886400664, guid: 9ed9ad27dcec19b4aa55fefdf9e02e27, type: 3}
@@ -1570,6 +1589,7 @@ GameObject:
   - component: {fileID: 1410550530}
   - component: {fileID: 1410550529}
   - component: {fileID: 1410550528}
+  - component: {fileID: 1410550535}
   - component: {fileID: 1410550532}
   - component: {fileID: 1410550527}
   - component: {fileID: 1410550531}
@@ -1629,6 +1649,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   animator: {fileID: 1410550533}
+  movementLocked: 0
 --- !u!212 &1410550529
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1811,6 +1832,19 @@ SortingGroup:
   m_SortingLayer: 0
   m_SortingOrder: 4
   m_SortAtRoot: 0
+--- !u!114 &1410550535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1410550526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8b37a84be4bdc545b3b1ed02ba803d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smashForce: -20
 --- !u!1001 &1561691251
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1905,7 +1939,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -2253911629886400664, guid: 9ed9ad27dcec19b4aa55fefdf9e02e27, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3626916397498700004, guid: 9ed9ad27dcec19b4aa55fefdf9e02e27, type: 3}
       propertyPath: m_Size.x
@@ -2255,7 +2289,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -2253911629886400664, guid: 9ed9ad27dcec19b4aa55fefdf9e02e27, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3626916397498700004, guid: 9ed9ad27dcec19b4aa55fefdf9e02e27, type: 3}
       propertyPath: m_Size.x

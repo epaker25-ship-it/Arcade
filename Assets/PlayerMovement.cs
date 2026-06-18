@@ -15,6 +15,8 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask groundLayer;
     public Animator animator;
 
+    public bool movementLocked;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -40,7 +42,10 @@ public class PlayerMovement : MonoBehaviour
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
-        rb.linearVelocity = new Vector2(moveInput.x * moveSpeed, rb.linearVelocity.y);
+        if (!movementLocked)
+        {
+            rb.linearVelocity = new Vector2(moveInput.x * moveSpeed, rb.linearVelocity.y);
+        }
 
         if (rb.linearVelocity.x == 0)
         {

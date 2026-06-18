@@ -29,4 +29,13 @@ public class PlayerSwitcher : MonoBehaviour
 
         players[currentIndex].enabled = true;
     }
+
+    public void OnSpecial(InputValue value)
+    {
+        if (value.isPressed)
+        {
+            players[currentIndex].GetComponent<CharacterSpecial>().UseSpecial();
+        }
+    }
+
 }
