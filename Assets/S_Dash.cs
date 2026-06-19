@@ -13,11 +13,14 @@ public class S_Dash : CharacterSpecial
     private PlayerMovement movement;
     public Transform dashCheckPoint;
 
+    public Animator animator;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         movement = GetComponent<PlayerMovement>();
         myCollider = GetComponent<Collider2D>();
+        animator = GetComponent<Animator>();
     }
 
     public override void UseSpecial()
@@ -28,6 +31,7 @@ public class S_Dash : CharacterSpecial
         dashTimer = 0f;
 
         IgnoreOtherPlayers(true);
+        animator.SetBool("IsDashing", true);
 
         Debug.Log("S used Dash!");
     }
@@ -85,6 +89,7 @@ public class S_Dash : CharacterSpecial
         rb.linearVelocity = Vector2.zero;
 
         IgnoreOtherPlayers(false);
+        animator.SetBool("IsDashing", false);
     }
 
 }
