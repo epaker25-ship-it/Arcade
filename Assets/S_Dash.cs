@@ -3,25 +3,51 @@ using UnityEngine;
 public class S_Dash : CharacterSpecial
 {
     public float maxDashSpeed = 20f;
-    public float dashDuration = 7f; // time to reach max speed
+    public float dashDuration = 7f;
+    private Collider2D myCollider;
     public LayerMask stopLayers;
 
     private Rigidbody2D rb;
     private bool isDashing;
     private float dashTimer;
     private PlayerMovement movement;
+    public Transform dashCheckPoint;
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         movement = GetComponent<PlayerMovement>();
+        myCollider = GetComponent<Collider2D>();
     }
 
     public override void UseSpecial()
     {
-        dashTimer = 0f; 
-        isDashing = true;
         movement.movementLocked = true;
+
+        isDashing = true;
+        dashTimer = 0f;
+
+        IgnoreOtherPlayers(true);
+
+        Debug.Log("S used Dash!");
+    }
+
+    void IgnoreOtherPlayers(bool ignore)
+    {
+        Collider2D[] myCols = GetComponentsInChildren<Collider2D>();
+        Collider2D[] allCols = FindObjectsOfType<Collider2D>();
+
+        foreach (var mine in myCols)
+        {
+            foreach (var other in allCols)
+            {
+                if (other.gameObject != gameObject &&
+                    other.gameObject.layer == LayerMask.NameToLayer("Player"))
+                {
+                    Physics2D.IgnoreCollision(mine, other, ignore);
+                }
+            }
+        }
     }
 
 
@@ -40,7 +66,12 @@ public class S_Dash : CharacterSpecial
 
         rb.linearVelocity = new Vector2(direction * speed, rb.linearVelocity.y);
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(direction, 0), 0.5f, stopLayers);
+        RaycastHit2D hit = Physics2D.Raycast(
+            dashCheckPoint.position,
+            new Vector2(direction, 0),
+            0.5f,
+            stopLayers
+        );
         if (hit.collider != null)
         {
             StopDash();
@@ -52,5 +83,8 @@ public class S_Dash : CharacterSpecial
         isDashing = false;
         movement.movementLocked = false;
         rb.linearVelocity = Vector2.zero;
+
+        IgnoreOtherPlayers(false);
     }
+
 }
