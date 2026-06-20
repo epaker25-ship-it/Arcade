@@ -23,12 +23,19 @@ public class PlayerSwitcher : MonoBehaviour
 
     void SwitchPlayer()
     {
-        players[currentIndex].enabled = false;
+        players[currentIndex].GetComponent<FlashEffect>().Flash(Color.black);
+
+        players[currentIndex].GetComponent<PlayerInput>().enabled = false;
 
         currentIndex = (currentIndex + 1) % players.Length;
 
-        players[currentIndex].enabled = true;
+        players[currentIndex].GetComponent<PlayerInput>().enabled = true;
+
+        players[currentIndex].GetComponent<FlashEffect>().Flash(new Color(2f, 2f, 2f, 1f));
+
+        Camera.main.GetComponent<CameraFollow>().target = players[currentIndex].transform;
     }
+
 
     public void OnSpecial(InputValue value)
     {

@@ -12,6 +12,7 @@ public class S_Dash : CharacterSpecial
     private float dashTimer;
     private PlayerMovement movement;
     public Transform dashCheckPoint;
+    private SpriteRenderer sprite;
 
     public Animator animator;
 
@@ -21,6 +22,7 @@ public class S_Dash : CharacterSpecial
         movement = GetComponent<PlayerMovement>();
         myCollider = GetComponent<Collider2D>();
         animator = GetComponent<Animator>();
+        sprite = GetComponentInChildren<SpriteRenderer>();
     }
 
     public override void UseSpecial()
@@ -66,7 +68,7 @@ public class S_Dash : CharacterSpecial
 
         float speed = Mathf.Lerp(0.4f, maxDashSpeed, Mathf.SmoothStep(0.4f, 1f, t));
 
-        float direction = Mathf.Sign(transform.localScale.x);
+        float direction = sprite.flipX ? -1f : 1f;
 
         rb.linearVelocity = new Vector2(direction * speed, rb.linearVelocity.y);
 
@@ -78,8 +80,15 @@ public class S_Dash : CharacterSpecial
         );
         if (hit.collider != null)
         {
+            var enemy = hit.collider.GetComponent<EnemyWalker>();
+            if (enemy != null)
+            {
+                enemy.Kill();
+            }
+
             StopDash();
         }
+
     }
 
     void StopDash()

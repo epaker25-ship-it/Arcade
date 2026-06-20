@@ -8,12 +8,13 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D rb;
     private Vector2 moveInput;
-    private bool isGrounded;
+    public bool isGrounded;
 
     public Transform groundCheck;
     public float groundCheckRadius = 0.1f;
     public LayerMask groundLayer;
     public Animator animator;
+    private SpriteRenderer sprite;
 
     public bool movementLocked;
 
@@ -21,11 +22,18 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        sprite = GetComponentInChildren<SpriteRenderer>();
     }
 
     public void OnMove(InputValue value)
     {
         moveInput = value.Get<Vector2>();
+
+        if (moveInput.x > 0.1f)
+            sprite.flipX = false;
+        else if (moveInput.x < -0.1f)
+            sprite.flipX = true;
+
         animator.SetBool("IsWalking", true);
     }
 
