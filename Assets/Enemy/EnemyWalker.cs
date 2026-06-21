@@ -10,6 +10,9 @@ public class EnemyWalker : MonoBehaviour
     private Rigidbody2D rb;
     private bool movingRight = true;
 
+    public Transform feetCheck;
+    public float feetRadius = 0.2f;
+
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -17,11 +20,17 @@ public class EnemyWalker : MonoBehaviour
 
     void FixedUpdate()
     {
+        // move
         rb.linearVelocity = new Vector2((movingRight ? 1 : -1) * speed, rb.linearVelocity.y);
 
-        bool wallHit = Physics2D.OverlapCircle(wallCheck.position, 0.1f, groundLayer);
+        bool isGrounded = Physics2D.OverlapCircle(feetCheck.position, feetRadius, groundLayer);
 
-        bool groundAhead = Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayer);
+        // only flip when ON the ground
+        if (!isGrounded)
+            return;
+
+        bool wallHit = Physics2D.OverlapCircle(wallCheck.position, 0.1f, groundLayer);
+        bool groundAhead = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
 
         if (wallHit || !groundAhead)
             Flip();
