@@ -6,6 +6,7 @@ public class EnemyWalker : MonoBehaviour
     public Transform groundCheck;
     public Transform wallCheck;
     public LayerMask groundLayer;
+    public LayerMask enemyLayer;
 
     private Rigidbody2D rb;
     private bool movingRight = true;
@@ -31,9 +32,11 @@ public class EnemyWalker : MonoBehaviour
 
         bool wallHit = Physics2D.OverlapCircle(wallCheck.position, 0.1f, groundLayer);
         bool groundAhead = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+        bool enemyAhead = Physics2D.OverlapCircle(wallCheck.position, 0.1f, enemyLayer);
 
-        if (wallHit || !groundAhead)
+        if (wallHit || enemyAhead || !groundAhead)
             Flip();
+
     }
 
     void Flip()
