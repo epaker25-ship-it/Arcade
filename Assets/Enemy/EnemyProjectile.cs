@@ -9,8 +9,14 @@ public class EnemyProjectile : MonoBehaviour
         Destroy(gameObject, lifetime);
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D col)
     {
+        if (col.collider.CompareTag("Player"))
+        {
+            col.collider.GetComponent<PlayerHealth>().TakeDamage(1);
+            Destroy(gameObject);
+        }
+
         Destroy(gameObject);
     }
 }

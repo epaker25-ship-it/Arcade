@@ -27,6 +27,11 @@ public class S_Dash : CharacterSpecial
 
     public override void UseSpecial()
     {
+        if (!CoinManager.Instance.CanUseSpecial())
+            return; 
+
+        CoinManager.Instance.SpendCoins();
+
         movement.movementLocked = true;
 
         isDashing = true;

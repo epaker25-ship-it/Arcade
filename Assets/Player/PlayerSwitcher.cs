@@ -5,6 +5,7 @@ public class PlayerSwitcher : MonoBehaviour
 {
     public PlayerInput[] players;
     private int currentIndex = 0;
+    public bool isControlled = false;
 
     void Start()
     {

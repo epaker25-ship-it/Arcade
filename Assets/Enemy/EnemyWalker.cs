@@ -45,8 +45,17 @@ public class EnemyWalker : MonoBehaviour
         transform.localScale = new Vector3(movingRight ? 1 : -1, 1, 1);
     }
 
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if (col.collider.CompareTag("Player"))
+        {
+            col.collider.GetComponent<PlayerHealth>().TakeDamage(1);
+        }
+    }
+
     public void Kill()
     {
+        CoinManager.Instance.AddCoin(1);
         Destroy(gameObject);
     }
 }

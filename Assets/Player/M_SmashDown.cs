@@ -14,8 +14,13 @@ public class M_SmashDown : CharacterSpecial
 
     public override void UseSpecial()
     {
+        if (!CoinManager.Instance.CanUseSpecial())
+            return; 
+
         if (movement.isGrounded)
             return;
+
+        CoinManager.Instance.SpendCoins();
 
         GetComponent<FlashEffect>().Flash(new Color(2f, 0f, 0f, 1f));
 
